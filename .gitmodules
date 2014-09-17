@@ -1,0 +1,3 @@
+[submodule "SharpBlade"]
+	path = SharpBlade
+	url = git://github.com/Sharparam/SharpBlade.git
