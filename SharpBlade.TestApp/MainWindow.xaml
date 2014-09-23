@@ -6,16 +6,14 @@
         <TabControl HorizontalAlignment="Left" Height="429" Margin="10,10,0,0" VerticalAlignment="Top" Width="772" Background="Black" Foreground="White" BorderBrush="Black">
             <TabItem Header="Rendering">
                 <Grid Background="Black">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="27*"/>
-                        <ColumnDefinition Width="601*"/>
-                    </Grid.ColumnDefinitions>
                     <Button Content="Draw WPF window" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="130" Grid.ColumnSpan="2" Click="WPFDrawClick"/>
                     <Button Content="Draw TP image" HorizontalAlignment="Left" Margin="525,10,0,0" VerticalAlignment="Top" Width="101" Grid.Column="1" Click="TPDrawClick"/>
                     <Button Content="Set DK image" HorizontalAlignment="Left" Margin="631,10,0,0" VerticalAlignment="Top" Width="92" Grid.Column="1" Click="DkDrawClick"/>
-                    <CheckBox Content="Render WPF window" Grid.Column="1" HorizontalAlignment="Left" Margin="112,13,0,0" VerticalAlignment="Top" Foreground="White" Checked="WpfRenderChecked" Unchecked="WpfRenderUnchecked"/>
-                    <TextBox Height="354" Margin="10,35,362,0" TextWrapping="Wrap" Text="Type text in here to test rendering..." VerticalAlignment="Top" Grid.ColumnSpan="2" Background="#FF212121" Foreground="White" FontSize="24"/>
-                    <ListBox x:Name="DkLogList" Grid.Column="1" HorizontalAlignment="Left" Height="354" Margin="376,35,0,0" VerticalAlignment="Top" Width="347" Background="#FF494949" Foreground="White"/>
+                    <CheckBox Content="Render WPF window" HorizontalAlignment="Left" Margin="145,13,0,0" VerticalAlignment="Top" Foreground="White" Checked="WpfRenderChecked" Unchecked="WpfRenderUnchecked"/>
+                    <TextBox Height="175" Margin="10,214,367,0" TextWrapping="Wrap" Text="Type text in here to test rendering..." VerticalAlignment="Top" Background="#FF212121" Foreground="White" FontSize="24"/>
+                    <ListBox x:Name="DkLogList" Height="354" Margin="404,35,15,0" VerticalAlignment="Top" Background="#FF494949" Foreground="White"/>
+                    <Button Content="Set bitmap object on DK2" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top" Width="156" Click="DkBitmapClick"/>
+                    <Image x:Name="DkBitmapPreview" HorizontalAlignment="Left" Height="100" Margin="31,60,0,0" VerticalAlignment="Top" Width="100"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Gestures" Height="22" VerticalAlignment="Top" HorizontalAlignment="Left" Width="62">

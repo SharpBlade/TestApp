@@ -4,6 +4,9 @@ namespace SharpBlade.TestApp
 {
     using System;
     using System.Collections.ObjectModel;
+    using System.Drawing;
+    using System.Windows.Interop;
+    using System.Windows.Media.Imaging;
 
     using SharpBlade.Events;
     using SharpBlade.Razer;
@@ -13,11 +16,13 @@ namespace SharpBlade.TestApp
     /// </summary>
     public partial class MainWindow : Window
     {
+        private static readonly Random Random = new Random();
+
         private readonly ObservableCollection<string> _dkLog;
 
         private readonly ObservableCollection<string> _gestureLog;
 
-        private ISwitchblade _sb;
+        private readonly ISwitchblade _sb;
 
         public MainWindow()
         {
@@ -52,10 +57,10 @@ namespace SharpBlade.TestApp
             LogGesture(msg);
         }
 
-        private IDynamicKey GetDk()
+        private IDynamicKey GetDk(DynamicKeyType type = DynamicKeyType.DK1)
         {
-            return _sb.DynamicKeys[DynamicKeyType.DK1]
-                   ?? _sb.DynamicKeys.Enable(DynamicKeyType.DK1, "dk_image.bmp", "dk_image_down.bmp", true);
+            return _sb.DynamicKeys[type]
+                   ?? _sb.DynamicKeys.Enable(type, "dk_image.bmp", "dk_image_down.bmp", true);
         }
 
         private void LogDk(string msg)
@@ -95,6 +100,26 @@ namespace SharpBlade.TestApp
         private void WpfRenderUnchecked(object sender, RoutedEventArgs e)
         {
             _sb.Touchpad.Clear();
+        }
+
+        private void DkBitmapClick(object sender, RoutedEventArgs e)
+        {
+            var dk = GetDk(DynamicKeyType.DK2);
+            var bmp = new Bitmap(115, 115);
+            for (var x = 0; x < bmp.Width; x++)
+                for (var y = 0; y < bmp.Height; y++)
+                {
+                    var r = Random.Next(0, 256);
+                    var g = r;
+                    var b = r;
+                    bmp.SetPixel(x, y, Color.FromArgb(r, g, b));
+                }
+            dk.Draw(bmp);
+            DkBitmapPreview.Source = Imaging.CreateBitmapSourceFromHBitmap(
+                bmp.GetHbitmap(),
+                IntPtr.Zero,
+                Int32Rect.Empty,
+                BitmapSizeOptions.FromEmptyOptions());
         }
     }
 }
