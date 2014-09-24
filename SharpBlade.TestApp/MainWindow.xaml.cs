@@ -24,6 +24,8 @@ namespace SharpBlade.TestApp
 
         private readonly ISwitchblade _sb;
 
+        private int _count;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -104,16 +106,14 @@ namespace SharpBlade.TestApp
 
         private void DkBitmapClick(object sender, RoutedEventArgs e)
         {
-            var dk = GetDk(DynamicKeyType.DK2);
+            var dk = GetDk(DynamicKeyType.DK1 + _count);
+            _count++;
+            if (_count > 9)
+                _count = 0;
             var bmp = new Bitmap(115, 115);
             for (var x = 0; x < bmp.Width; x++)
                 for (var y = 0; y < bmp.Height; y++)
-                {
-                    var r = Random.Next(0, 256);
-                    var g = r;
-                    var b = r;
-                    bmp.SetPixel(x, y, Color.FromArgb(r, g, b));
-                }
+                    bmp.SetPixel(x, y, Color.FromArgb(255 * x / bmp.Width, 255 * y / bmp.Height, 0));
             dk.Draw(bmp);
             DkBitmapPreview.Source = Imaging.CreateBitmapSourceFromHBitmap(
                 bmp.GetHbitmap(),
